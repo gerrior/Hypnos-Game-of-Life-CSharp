@@ -1,3 +1,10 @@
+//
+//  Cell.cs
+//  Hypnos Game of Life C#
+//
+//  Created by Mark Gerrior on 1/14/21.
+//
+
 using System;
 
 public enum State
