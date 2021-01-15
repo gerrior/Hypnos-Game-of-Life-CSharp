@@ -18,24 +18,21 @@ enum OutputType
 class ConsoleIO
 {
     public string path = "";
+    string exePath = "";
     public int iterations = 10;
     public void ingestCommandLine(string[] CommandLine)
     {
         // number of arguments passed to the program
         int argCount = CommandLine.Count();
         int currentArg = 1;
+        
+        exePath = CommandLine[0];
 
         while (currentArg < argCount)
         {
 
             // take the first “real” argument (the option argument) from the arguments array
-            string argument = CommandLine[currentArg];
-
-            // skip the first character in the argument's string (the hyphen character)
-            // let (option, value) = getOption(String(argument.suffix(1)))
-            // BUGBUG
-            string option = "";
-            string value = "";
+            string option = CommandLine[currentArg];
 
             switch (option)
             {
@@ -49,7 +46,7 @@ class ConsoleIO
                     }
                     else
                     {
-                        writeMessage($"Missing path from option {value}", OutputType.error);
+                        writeMessage($"Missing path from option {option}", OutputType.error);
                     }
                     break;
                 case "-g":
@@ -72,14 +69,14 @@ class ConsoleIO
                     }
                     else
                     {
-                        writeMessage($"Missing generations from option {value}", OutputType.error);
+                        writeMessage($"Missing generations from option {option}", OutputType.error);
                     }
                     break;
                 case "-h":
                     printUsage();
                     break;
                 default:
-                    writeMessage($"Unknown option {value}", OutputType.error);
+                    writeMessage($"Unknown option {option}", OutputType.error);
                     printUsage();
                     break;
             }
@@ -141,19 +138,18 @@ class ConsoleIO
         {
             case OutputType.standard:
                 // \u{001B}[;m = reset terminal's text color back to the default
-                System.Console.Write($"{message}"); // BUGBUG stdout
+                System.Console.Write($"{message}"); // FIXME stdout
                 break;
             case OutputType.error:
                 // \u{001B}[0;31m = control characters that cause Terminal to change the color of the following text strings to red
-                System.Console.Write($"{message}\n"); // BUGBUG stderr
+                System.Console.Write($"{message}\n"); // FIXME stderr
                 break;
         }
     }
 
     public void printUsage()
     {
-        // BUGBUG let executableName = URL(string: CommandLine.arguments[0] as String)!.lastPathComponent
-        string executableName = "gol";
+        string executableName = System.AppDomain.CurrentDomain.FriendlyName;
 
         writeMessage("usage:");
         writeMessage($"{executableName} [-g int] -f file");

@@ -7,6 +7,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 class GameOfLife
 {
@@ -17,10 +18,10 @@ class GameOfLife
     List<string> cellsToBirth;
 
     public int generation = 0;
-    int population = 0;
-    // {
-    //BUGBUG        cells.filter{ $0.value.state == .alive }.count
-    // }
+    public int population
+    {
+        get => cells.Count;
+    }
 
     public GameOfLife(List<string> lifeFile)
     {
@@ -50,12 +51,13 @@ class GameOfLife
         List<string> results = new List<string>();;
         results.Add("#Life 1.06");
 
-        // BUGBUG var sortedKeys = cells.Keys.();
+        var sortedKeys = cells.Keys.ToList();
+        sortedKeys.Sort();
 
-        // foreach (var key in sortedKeys)
-        // {
-        //     results.Add(cells[key]);
-        // }
+        foreach (var key in sortedKeys)
+        {
+            results.Add(key);
+        }
 
         return results;
     }
