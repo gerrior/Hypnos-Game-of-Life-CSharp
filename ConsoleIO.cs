@@ -25,9 +25,9 @@ class ConsoleIO
     {
         // number of arguments passed to the program
         int argCount = CommandLine.Count();
-        int currentArg = 1;
+        int currentArg = 0; // In Swift this starts at 1 (0 is the exec path)
 
-        exePath = CommandLine[0];
+        exePath = System.AppDomain.CurrentDomain.BaseDirectory;
 
         while (currentArg < argCount)
         {
@@ -58,12 +58,11 @@ class ConsoleIO
                         string generations = CommandLine[currentArg];
                         try
                         {
-                            int temp = int.Parse(" 100 ");
-                            iterations = temp;
+                            iterations = int.Parse(generations);
                         }
                         catch
                         {
-                            writeMessage("generations parameter must be a number.", OutputType.error);
+                            writeMessage($"-g (generations) value '{generations}' must be a number. Using the default {iterations}.", OutputType.error);
                             return;
                         }
                         writeMessage($"Found generations {generations}");
@@ -117,7 +116,7 @@ class ConsoleIO
         {
             case OutputType.standard:
                 // \u{001B}[;m = reset terminal's text color back to the default
-                System.Console.Write($"{message}"); // FIXME stdout
+                System.Console.Write($"{message}\n"); // FIXME stdout
                 break;
             case OutputType.error:
                 // \u{001B}[0;31m = control characters that cause Terminal to change the color of the following text strings to red
