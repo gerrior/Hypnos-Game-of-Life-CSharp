@@ -14,8 +14,6 @@ namespace Hypnos_Game_of_Life_CSharp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-
             ConsoleIO consoleIO = new ConsoleIO();
 
             consoleIO.ingestCommandLine(args);
