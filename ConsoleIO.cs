@@ -21,6 +21,7 @@ class ConsoleIO
     public string path = "";
     string exePath = "";
     public int iterations = 10;
+    public bool saveAfterEveryIteration = false;
     public void ingestCommandLine(string[] CommandLine)
     {
         // number of arguments passed to the program
@@ -77,6 +78,10 @@ class ConsoleIO
                     printUsage();
                     break;
 
+                case "-s":
+                    saveAfterEveryIteration = true;
+                    break;
+
                 default:
                     writeMessage($"Unknown option {option}", OutputType.error);
                     printUsage();
@@ -102,9 +107,15 @@ class ConsoleIO
         return allLinesList;
     }
 
-    public void writeFile(List<string> outputToWrite)
+    public void writeFile(List<string> outputToWrite, int generations = 0)
     {
-        var filenameAndPath = Path.GetFileNameWithoutExtension(path) + "-result.txt";
+        string appendToFilename = "-result.txt";
+
+        if (generations > 0) {
+            appendToFilename = $"-result-g{generations}.txt";
+        } 
+
+        var filenameAndPath = Path.GetFileNameWithoutExtension(path) + appendToFilename;
 
         // Write the file
         System.IO.File.WriteAllLines(filenameAndPath, outputToWrite);
