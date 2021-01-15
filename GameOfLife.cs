@@ -65,7 +65,7 @@ class GameOfLife
         return results;
     }
 
-    Cell cellAt(int x, int y, bool createIfNotPresent = true)
+    Cell cellAt(Int64 x, Int64 y, bool createIfNotPresent = true)
     {
         string key = $"{x} {y}";
         Cell foundCell;

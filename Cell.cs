@@ -16,11 +16,11 @@ public enum State
 public class Cell
 {
     // Properties
-    public int x;
-    public int y;
+    public Int64 x;
+    public Int64 y;
     public State state;
 
-    public Cell(int _x, int _y, State _state = State.alive)
+    public Cell(Int64 _x, Int64 _y, State _state = State.alive)
     {
         x = _x;
         y = _y;
@@ -33,7 +33,7 @@ public class Cell
 
         try
         {
-            int[] coordinates = Array.ConvertAll(coordinateArray, s => int.Parse(s));
+            Int64[] coordinates = Array.ConvertAll(coordinateArray, s => Int64.Parse(s));
 
             x = coordinates[0]!;
             y = coordinates[1]!;
