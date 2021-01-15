@@ -142,9 +142,10 @@ class ConsoleIO
         string executableName = System.AppDomain.CurrentDomain.FriendlyName;
 
         writeMessage("usage:");
-        writeMessage($"{executableName} [-g int] -f file");
+        writeMessage($"{executableName} [-g int] -f file [-s]");
         writeMessage("-g = Generations - Default number of generations is 10");
         writeMessage("-f = File");
+        writeMessage("-s = Save - When present, will save every generation to individual files");
         writeMessage($"{executableName} -h shows this information");
     }
 
