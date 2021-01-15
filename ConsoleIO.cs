@@ -6,6 +6,7 @@
 //
 
 using System;
+using System.IO;
 using System.Linq;
 using System.Collections.Generic;
 
@@ -25,12 +26,11 @@ class ConsoleIO
         // number of arguments passed to the program
         int argCount = CommandLine.Count();
         int currentArg = 1;
-        
+
         exePath = CommandLine[0];
 
         while (currentArg < argCount)
         {
-
             // take the first “real” argument (the option argument) from the arguments array
             string option = CommandLine[currentArg];
 
@@ -49,6 +49,7 @@ class ConsoleIO
                         writeMessage($"Missing path from option {option}", OutputType.error);
                     }
                     break;
+
                 case "-g":
                     currentArg = currentArg + 1;
 
@@ -72,9 +73,11 @@ class ConsoleIO
                         writeMessage($"Missing generations from option {option}", OutputType.error);
                     }
                     break;
+
                 case "-h":
                     printUsage();
                     break;
+
                 default:
                     writeMessage($"Unknown option {option}", OutputType.error);
                     printUsage();
@@ -87,49 +90,25 @@ class ConsoleIO
 
     public List<string> openFile()
     {
+        // Make sure the file exists
+        var exists = File.Exists(path);
+        if (!exists)
+        {
+            Environment.FailFast($"File Not Found: '{path}'.");
+        }
 
-    //     // Includes trailing slash
-    //     let appDirectory = URL(string: CommandLine.arguments[0] as String)!.deletingLastPathComponent()
+        // Read from the file
+        List<string> allLinesList = File.ReadAllLines(path).ToList();
 
-    //     // appendingPathComponent fails at 120+ characters.
-    //     let filenameAndPath = appDirectory.absoluteString + path
-    //     //print(filenameAndPath)
-
-    //     // Make sure the file exists
-    //     guard FileManager.default.fileExists(atPath: filenameAndPath) else {
-    //         preconditionFailure("File Not Found: \(filenameAndPath)")
-    //     }
-
-    //     // Read from the file
-    //     do {
-    //         let data = try String(contentsOfFile: filenameAndPath, encoding: String.Encoding.utf8)
-    //         let fileAsArray = data.components(separatedBy: .newlines)
-    //         return fileAsArray
-    //     } catch let error as NSError {
-    //         print("Failed reading from URL: \(filenameAndPath), Error: " + error.localizedDescription)
-    //     }
-        return new List<string>();
+        return allLinesList;
     }
 
     public void writeFile(List<string> outputToWrite)
     {
-    //     // Includes trailing slash
-    //     let appDirectory = URL(string: CommandLine.arguments[0] as String)!.deletingLastPathComponent()
+        var filenameAndPath = Path.GetFileNameWithoutExtension(path) + "-result.txt";
 
-    //     // appendingPathComponent fails at 120+ characters.
-    //     let filenameWithoutExtension = URL(fileURLWithPath: path).deletingPathExtension().lastPathComponent
-    //     let filenameAndPath = appDirectory.absoluteString + filenameWithoutExtension + "-result.txt"
-    //     //print(filenameAndPath)
-
-    //     let url = URL(string: filenameAndPath)!.path
-    //     let joinedStrings = outputToWrite.joined(separator: "\n")
-
-    //     // Write the file
-    //     do {
-    //         try joinedStrings.write(toFile: url, atomically: true, encoding: String.Encoding.utf8)
-    //     } catch let error as NSError {
-    //         print("Failed writing to URL: \(filenameAndPath), Error: " + error.localizedDescription)
-    //     }
+        // Write the file
+        System.IO.File.WriteAllLines(filenameAndPath, outputToWrite);
     }
 
     public void writeMessage(string message, OutputType to = OutputType.standard)

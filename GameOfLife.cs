@@ -25,6 +25,9 @@ class GameOfLife
 
     public GameOfLife(List<string> lifeFile)
     {
+        cellsToKill = new List<string>();
+        cellsToBirth = new List<string>();
+        
         // Create sparse grid
         foreach (string row in lifeFile)
         {
@@ -48,7 +51,7 @@ class GameOfLife
 
     public List<string> exportGrid()
     {
-        List<string> results = new List<string>();;
+        List<string> results = new List<string>();
         results.Add("#Life 1.06");
 
         var sortedKeys = cells.Keys.ToList();
