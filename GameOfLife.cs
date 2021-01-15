@@ -225,7 +225,7 @@ class GameOfLife
         foreach (string dead in cellsToKill)
         {
             // Use the dead key to set the dictionary value to nil
-            cells[dead] = null;
+            cells.Remove(dead);
         }
 
         // Add cells that were born this turn
