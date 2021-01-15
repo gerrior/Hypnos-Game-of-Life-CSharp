@@ -36,7 +36,8 @@ namespace Hypnos_Game_of_Life_CSharp
                 {
                     game.performGameTurn();
 
-                    if (consoleIO.saveAfterEveryIteration) {
+                    if (consoleIO.saveAfterEveryIteration)
+                    {
                         List<string> checkpoint = game.exportGrid();
                         consoleIO.writeFile(checkpoint, game.generation);
                     }

@@ -27,7 +27,7 @@ class GameOfLife
     {
         cellsToKill = new List<string>();
         cellsToBirth = new List<string>();
-        
+
         // Create sparse grid
         foreach (string row in lifeFile)
         {

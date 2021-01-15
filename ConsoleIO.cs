@@ -111,9 +111,10 @@ class ConsoleIO
     {
         string appendToFilename = "-result.txt";
 
-        if (generations > 0) {
+        if (generations > 0)
+        {
             appendToFilename = $"-result-g{generations}.txt";
-        } 
+        }
 
         var filenameAndPath = Path.GetFileNameWithoutExtension(path) + appendToFilename;
 
