@@ -68,17 +68,18 @@ class GameOfLife
     Cell cellAt(int x, int y, bool createIfNotPresent = true)
     {
         string key = $"{x} {y}";
+        Cell foundCell;
 
         // Is key in the current list of live cells?
-        if (cells[key] != null)
+        if (cells.TryGetValue(key, out foundCell))
         {
-            return cells[key];
+            return foundCell;
         }
 
         // Is key in the current list of potential cells?
-        if (potentialCells[key] != null)
+        if (potentialCells.TryGetValue(key, out foundCell))
         {
-            return potentialCells[key];
+            return foundCell;
         }
 
         // Not found it. Create a cell so caller logic can process it
