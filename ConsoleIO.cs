@@ -9,6 +9,7 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 enum OutputType
 {
@@ -28,6 +29,7 @@ class ConsoleIO
         int argCount = CommandLine.Count();
         int currentArg = 0; // In Swift this starts at 1 (0 is the exec path)
 
+        string dotNetVersion = RuntimeInformation.FrameworkDescription;
         exePath = System.AppDomain.CurrentDomain.BaseDirectory;
 
         while (currentArg < argCount)
