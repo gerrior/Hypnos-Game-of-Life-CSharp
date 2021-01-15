@@ -5,7 +5,9 @@
 //  Created by Mark Gerrior on 1/14/21.
 //
 
+using System;
 using System.Linq;
+using System.Collections.Generic;
 
 enum OutputType
 {
@@ -15,8 +17,8 @@ enum OutputType
 
 class ConsoleIO
 {
-    string path = "";
-    int iterations = 10;
+    public string path = "";
+    public int iterations = 10;
     public void ingestCommandLine(string[] CommandLine)
     {
         // number of arguments passed to the program
@@ -86,7 +88,8 @@ class ConsoleIO
         }
     }
 
-    // func openFile() -> [String] {
+    public List<string> openFile()
+    {
 
     //     // Includes trailing slash
     //     let appDirectory = URL(string: CommandLine.arguments[0] as String)!.deletingLastPathComponent()
@@ -108,10 +111,11 @@ class ConsoleIO
     //     } catch let error as NSError {
     //         print("Failed reading from URL: \(filenameAndPath), Error: " + error.localizedDescription)
     //     }
-    //     return []
-    // }
+        return new List<string>();
+    }
 
-    // func writeFile(outputToWrite: [String]) {
+    public void writeFile(List<string> outputToWrite)
+    {
     //     // Includes trailing slash
     //     let appDirectory = URL(string: CommandLine.arguments[0] as String)!.deletingLastPathComponent()
 
@@ -129,9 +133,9 @@ class ConsoleIO
     //     } catch let error as NSError {
     //         print("Failed writing to URL: \(filenameAndPath), Error: " + error.localizedDescription)
     //     }
-    // }
+    }
 
-    private void writeMessage(string message, OutputType to = OutputType.standard)
+    public void writeMessage(string message, OutputType to = OutputType.standard)
     {
         switch (to)
         {
@@ -146,7 +150,7 @@ class ConsoleIO
         }
     }
 
-    private void printUsage()
+    public void printUsage()
     {
         // BUGBUG let executableName = URL(string: CommandLine.arguments[0] as String)!.lastPathComponent
         string executableName = "gol";

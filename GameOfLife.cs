@@ -16,7 +16,7 @@ class GameOfLife
     List<string> cellsToKill;
     List<string> cellsToBirth;
 
-    int generation = 0;
+    public int generation = 0;
     int population = 0;
     // {
     //BUGBUG        cells.filter{ $0.value.state == .alive }.count
@@ -24,7 +24,6 @@ class GameOfLife
 
     public GameOfLife(List<string> lifeFile)
     {
-
         // Create sparse grid
         foreach (string row in lifeFile)
         {
@@ -46,9 +45,9 @@ class GameOfLife
         generation = 0;
     }
 
-    List<string> exportGrid()
+    public List<string> exportGrid()
     {
-        List<string> results;
+        List<string> results = new List<string>();;
         results.Add("#Life 1.06");
 
         // BUGBUG var sortedKeys = cells.Keys.();
@@ -203,7 +202,7 @@ class GameOfLife
         }
     }
 
-    void performGameTurn()
+    public void performGameTurn()
     {
         cellsToKill.Clear(); // Array of keys
         cellsToBirth.Clear(); // Array of keys
