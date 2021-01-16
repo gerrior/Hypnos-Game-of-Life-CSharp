@@ -27,3 +27,10 @@ While I started with the basic game logic from iOS from my summer project; it ha
 
 ### How to Review
 Start with ```main()``` in ```Program.cs```. The bulk of the program logic is in ```GameOfLife.cs``` with a supporting object in ```Cell.cs```. ```ConsoleIO.cs``` supports the command line program (file input/output and parsing the command line) and should be reviewed last.
+
+### How to Run
+1. Launch Visual Studio Code
+2. In Visual Studio Code, select File > Open... and after navigating to the ```Hypnos Game of Life CSharp``` directory, press the Open button
+3. Within Visual Studio Code, expand the ```.vscode``` directory and open ```launch.json```
+4. Change the default line 14 of ```"args": "",``` to ```"args": "-g 10 -f life.txt",```
+5. From the Run menu, select "Start Debugging"
